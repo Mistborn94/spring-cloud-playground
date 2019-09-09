@@ -1,4 +1,4 @@
-package com.example.cloudstreamdemo
+package com.example.cloudstream.demo
 
 import org.springframework.cloud.stream.annotation.EnableBinding
 import org.springframework.cloud.stream.annotation.StreamListener

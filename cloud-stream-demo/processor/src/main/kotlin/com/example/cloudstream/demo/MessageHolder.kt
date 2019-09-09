@@ -1,4 +1,4 @@
-package com.example.cloudstreamdemo
+package com.example.cloudstream.demo
 
 import java.time.LocalDateTime
 

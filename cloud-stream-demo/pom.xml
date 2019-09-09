@@ -58,6 +58,14 @@
                 <artifactId>kotlin-stdlib</artifactId>
                 <version>${kotlin.version}</version>
             </dependency>
+            <!-- Adding the context indexer can theoretically improve startup times.
+            It doesn't seem to have an effect on a tiny app like this -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-indexer</artifactId>
+                <version>${spring.version}</version>
+                <optional>true</optional>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -77,13 +85,19 @@
                             <goals>
                                 <goal>compile</goal>
                             </goals>
-
                         </execution>
                         <execution>
                             <id>test-compile</id>
                             <phase>test-compile</phase>
                             <goals>
                                 <goal>test-compile</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <!-- Enable annotation processing for kotlin classes -->
+                            <id>kapt</id>
+                            <goals>
+                                <goal>kapt</goal>
                             </goals>
                         </execution>
                     </executions>
@@ -103,6 +117,28 @@
                             <version>${kotlin.version}</version>
                         </dependency>
                     </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>unpack</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>unpack</goal>
+                            </goals>
+                            <configuration>
+                                <artifactItems>
+                                    <artifactItem>
+                                        <groupId>${project.groupId}</groupId>
+                                        <artifactId>${project.artifactId}</artifactId>
+                                        <version>${project.version}</version>
+                                    </artifactItem>
+                                </artifactItems>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>

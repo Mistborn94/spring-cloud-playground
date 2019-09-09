@@ -1,11 +1,11 @@
-package com.example.cloudstreamwebdemo
+package com.example.cloudstream.demo
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
-class SourceDemoApplication
+class Application
 
 fun main(args: Array<String>) {
-    SpringApplication.run(SourceDemoApplication::class.java, *args)
+    SpringApplication.run(Application::class.java, *args)
 }

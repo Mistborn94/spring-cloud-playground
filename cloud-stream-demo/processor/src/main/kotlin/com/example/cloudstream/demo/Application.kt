@@ -1,4 +1,4 @@
-package com.example.cloudstreamdemo
+package com.example.cloudstream.demo
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -9,13 +9,14 @@ import java.time.LocalDateTime
 
 @SpringBootApplication
 @EnableBinding(Processor::class)
-class ProcessorDemoApplication {
+class Application {
 
     @Bean
     fun addTimestamp(): (String) -> MessageHolder {
         return { message ->
             println("Processing $message")
-            MessageHolder(message, LocalDateTime.now()) }
+            MessageHolder(message, LocalDateTime.now())
+        }
     }
 
     @Bean
@@ -33,5 +34,5 @@ class ProcessorDemoApplication {
 }
 
 fun main(args: Array<String>) {
-    SpringApplication.run(ProcessorDemoApplication::class.java, *args)
+    SpringApplication.run(Application::class.java, *args)
 }

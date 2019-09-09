@@ -1,7 +1,11 @@
 FROM adoptopenjdk/openjdk11:alpine-jre
 
-ARG jar
-WORKDIR /app
+ARG MAIN_CLASS
+ENV MAIN_CLASS_ENV=$MAIN_CLASS
 
-COPY  /target/$jar /app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+ARG DEPENDENCY=target/dependency
+COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY ${DEPENDENCY}/META-INF /app/META-INF
+COPY ${DEPENDENCY}/BOOT-INF/classes /app
+
+ENTRYPOINT ["java","-noverify","-cp","app:app/lib/*", "com.example.cloudstream.demo.ApplicationKt"]
