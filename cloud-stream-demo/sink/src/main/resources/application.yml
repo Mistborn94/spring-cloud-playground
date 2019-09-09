@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+            destination: sink
+  config:
+    location: classpath:/application.properties
+  jmx:
+    enabled: false

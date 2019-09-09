@@ -1,0 +1,17 @@
+spring:
+    cloud:
+        stream:
+            bindings:
+                input:
+                    destination: processor
+                output:
+                    destination: sink
+            function:
+                definition: byteToString|toUpperCase|addTimestamp
+    config:
+        location: classpath:/application.properties
+    jmx:
+        enabled: false
+    jackson:
+        mapper:
+            default-view-inclusion: true

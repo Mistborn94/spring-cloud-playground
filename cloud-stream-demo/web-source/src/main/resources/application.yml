@@ -1,0 +1,10 @@
+spring:
+  config:
+    location: classpath:/application.properties
+  jmx:
+    enabled: false
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: processor

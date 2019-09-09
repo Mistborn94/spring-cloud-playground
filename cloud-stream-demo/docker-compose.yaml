@@ -12,6 +12,9 @@ services:
   source:
     build:
       context: ./web-source
+      dockerfile: ../Dockerfile
+      args:
+        jar: cloud-stream-web-source-0.0.1-SNAPSHOT.jar
     environment:
       SPRING_RABBITMQ_HOST: myrabbit
     ports:
@@ -20,11 +23,17 @@ services:
   sink:
     build:
       context: ./sink
+      dockerfile: ../Dockerfile
+      args:
+        jar: cloud-stream-sink-0.0.1-SNAPSHOT.jar
     environment:
       SPRING_RABBITMQ_HOST: myrabbit
 
   processor:
     build:
       context: ./processor
+      dockerfile: ../Dockerfile
+      args:
+        jar: cloud-stream-processor-0.0.1-SNAPSHOT.jar
     environment:
       SPRING_RABBITMQ_HOST: myrabbit
