@@ -1,0 +1,30 @@
+version: '3'
+services:
+
+  myrabbit:
+    image: rabbitmq:management
+    ports:
+      - 5672:5672
+      - 5671:5671
+      - 15671:15671
+      - 15672:15672
+
+  source:
+    build:
+      context: ./web-source
+    environment:
+      SPRING_RABBITMQ_HOST: myrabbit
+    ports:
+      - 8080:8080
+
+  sink:
+    build:
+      context: ./sink
+    environment:
+      SPRING_RABBITMQ_HOST: myrabbit
+
+  processor:
+    build:
+      context: ./processor
+    environment:
+      SPRING_RABBITMQ_HOST: myrabbit
