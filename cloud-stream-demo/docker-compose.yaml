@@ -14,7 +14,8 @@ services:
       context: ./web-source
       dockerfile: ../Dockerfile
     environment:
-      SPRING_RABBITMQ_HOST: myrabbit
+      SPRING_PROFILES_ACTIVE: compose
+      SPRING_CLOUD_CONFIG_URI: http://configserver:8888
     ports:
       - 8080:8080
 
@@ -23,11 +24,22 @@ services:
       context: ./processor
       dockerfile: ../Dockerfile
     environment:
-      SPRING_RABBITMQ_HOST: myrabbit
+      SPRING_PROFILES_ACTIVE: compose
+      SPRING_CLOUD_CONFIG_URI: http://configserver:8888
 
   sink:
     build:
       context: ./sink
       dockerfile: ../Dockerfile
     environment:
-      SPRING_RABBITMQ_HOST: myrabbit
+      SPRING_PROFILES_ACTIVE: compose
+      SPRING_CLOUD_CONFIG_URI: http://configserver:8888
+
+  configserver:
+    build:
+      context: ./config-server
+      dockerfile: ../Dockerfile
+    ports:
+      - 8888:8888
+    environment:
+      SPRING_CLOUD_CONFIG_SERVER_GIT_URI: https://github.com/Mistborn94/playground.git
