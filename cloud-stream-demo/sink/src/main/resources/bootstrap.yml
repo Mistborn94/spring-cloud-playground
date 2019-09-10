@@ -4,3 +4,8 @@ spring:
   cloud:
     config:
       fail-fast: true
+      retry:
+        multiplier: 1.5
+        initial-interval: 1000
+        max-interval: 5000
+        max-attempts: 8
