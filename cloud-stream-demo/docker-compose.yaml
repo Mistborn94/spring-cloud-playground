@@ -9,6 +9,15 @@ services:
       - 15671:15671
       - 15672:15672
 
+  configserver:
+    build:
+      context: ./config-server
+      dockerfile: ../Dockerfile
+    ports:
+      - 8888:8888
+    environment:
+      SPRING_CLOUD_CONFIG_SERVER_GIT_URI: https://github.com/Mistborn94/playground.git
+
   source:
     build:
       context: ./web-source
@@ -18,6 +27,9 @@ services:
       SPRING_CLOUD_CONFIG_URI: http://configserver:8888
     ports:
       - 8080:8080
+    depends_on:
+      - myrabbit
+      - configserver
 
   processor:
     build:
@@ -26,6 +38,9 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: compose
       SPRING_CLOUD_CONFIG_URI: http://configserver:8888
+    depends_on:
+      - myrabbit
+      - configserver
 
   sink:
     build:
@@ -34,12 +49,6 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: compose
       SPRING_CLOUD_CONFIG_URI: http://configserver:8888
-
-  configserver:
-    build:
-      context: ./config-server
-      dockerfile: ../Dockerfile
-    ports:
-      - 8888:8888
-    environment:
-      SPRING_CLOUD_CONFIG_SERVER_GIT_URI: https://github.com/Mistborn94/playground.git
+    depends_on:
+      - myrabbit
+      - configserver

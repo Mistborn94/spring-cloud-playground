@@ -5,4 +5,6 @@ spring:
     config:
       server:
         git:
-          search-paths: cloud-stream-config
+          search-paths:
+          - cloud-stream-config
+          - cloud-stream-config/{application}

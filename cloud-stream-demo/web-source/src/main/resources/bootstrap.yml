@@ -1,3 +1,6 @@
 spring:
   application:
     name: source
+  cloud:
+    config:
+      fail-fast: true
