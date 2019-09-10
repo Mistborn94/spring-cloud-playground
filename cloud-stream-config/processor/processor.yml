@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: processor
+        output:
+          destination: sink
+        function:
+          definition: byteToString|toUpperCase|addTimestamp
+  jackson:
+      mapper:
+        default-view-inclusion: true
