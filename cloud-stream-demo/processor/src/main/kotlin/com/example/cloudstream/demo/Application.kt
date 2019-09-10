@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 
 @SpringBootApplication
 @EnableBinding(Processor::class)
-class Application {
+class ProcessorApplication {
 
     @Bean
     fun addTimestamp(): (String) -> MessageHolder {
@@ -34,5 +34,5 @@ class Application {
 }
 
 fun main(args: Array<String>) {
-    SpringApplication.run(Application::class.java, *args)
+    SpringApplication.run(ProcessorApplication::class.java, *args)
 }
