@@ -6,8 +6,8 @@ spring:
           destination: processor
         output:
           destination: sink
-        function:
-          definition: byteToString|toUpperCase|addTimestamp
+      function:
+        definition: byteToString|toUpperCase|addTimestamp
   jackson:
       mapper:
         default-view-inclusion: true
