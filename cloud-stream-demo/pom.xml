@@ -20,6 +20,15 @@
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <kotlin.version>1.3.50</kotlin.version>
         <spring-cloud-function.version>2.1.0.RELEASE</spring-cloud-function.version>
+        <dockerfile-maven-plugin.version>1.4.12</dockerfile-maven-plugin.version>
+
+        <!--        <dockerfile.contextDirectory>${project.basedir}</dockerfile.contextDirectory>-->
+        <!--        <dockerfile.dockerfile>${project.basedir}/../Dockerfile</dockerfile.dockerfile>-->
+        <docker-maven-plugin.version>0.31.0</docker-maven-plugin.version>
+        <docker.skip.push>true</docker.skip.push>
+        <docker-maven-plugin.dockerFile>${project.basedir}/../Dockerfile</docker-maven-plugin.dockerFile>
+        <docker-maven-plugin.contextDir>${project.basedir}</docker-maven-plugin.contextDir>
+        <docker-maven-plugin.image-name>mistborn94/example-${project.artifactId}</docker-maven-plugin.image-name>
     </properties>
 
     <modules>
@@ -138,6 +147,30 @@
                                     </artifactItem>
                                 </artifactItems>
                             </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${docker-maven-plugin.version}</version>
+                    <configuration>
+                        <images>
+                            <image>
+                                <name>${docker-maven-plugin.image-name}</name>
+                                <build>
+                                    <dockerFile>${docker-maven-plugin.dockerFile}</dockerFile>
+                                    <contextDir>${docker-maven-plugin.contextDir}</contextDir>
+                                </build>
+                            </image>
+                        </images>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>build</id>
+                            <goals>
+                                <goal>build</goal>
+                            </goals>
                         </execution>
                     </executions>
                 </plugin>
