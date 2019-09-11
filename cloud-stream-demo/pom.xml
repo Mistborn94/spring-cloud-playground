@@ -68,8 +68,11 @@
                 <artifactId>kotlin-stdlib</artifactId>
                 <version>${kotlin.version}</version>
             </dependency>
-            <!-- Adding the context indexer can theoretically improve startup times.
-            It doesn't seem to have an effect on a tiny app like this -->
+            <!--
+            Adding the context indexer can theoretically improve startup times, but:
+            * It doesn't seem to have an effect on a tiny app like this
+            * The generated spring.components file contains a timestamp that messes with the docker layers
+            -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context-indexer</artifactId>
