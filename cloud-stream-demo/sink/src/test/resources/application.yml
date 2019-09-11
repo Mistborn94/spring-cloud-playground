@@ -11,6 +11,8 @@ spring:
   jackson:
     mapper:
       default-view-inclusion: true
+  main:
+    banner-mode: 'off'
 logging:
   level:
     root: error

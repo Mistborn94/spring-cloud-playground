@@ -1,0 +1,5 @@
+<!--Log levels in application.yaml doesn't affect spring stuff logged before the spring boot banner-->
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <logger name="org.springframework" level="ERROR"/>
+</configuration>
