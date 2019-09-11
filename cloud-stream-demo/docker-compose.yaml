@@ -3,16 +3,9 @@ services:
 
   myrabbit:
     image: rabbitmq:management
-    ports:
-      - 5672:5672
-      - 5671:5671
-      - 15671:15671
-      - 15672:15672
 
   configserver:
     image: mistborn94/example-configserver
-    ports:
-      - 8888:8888
     environment:
       SPRING_CLOUD_CONFIG_SERVER_GIT_URI: https://github.com/Mistborn94/playground.git
 
