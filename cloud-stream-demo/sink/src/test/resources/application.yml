@@ -11,3 +11,6 @@ spring:
   jackson:
     mapper:
       default-view-inclusion: true
+logging:
+  level:
+    root: error
