@@ -8,7 +8,7 @@ services:
       - 15672:15672
 
   configserver:
-    image: mistborn94/example-configserver
+    image: mistborn94/example-config-server
     environment:
       SPRING_CLOUD_CONFIG_SERVER_GIT_URI: https://github.com/Mistborn94/playground.git
 

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-source
+spec:
+  selector:
+    matchLabels:
+      app: web-source
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web-source
+        project: cloud-stream-demo
+    spec:
+      containers:
+        - name: web-source
+          image: mistborn94/example-cloud-stream-web-source:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: env-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-source
+  labels:
+    project: cloud-stream-demo
+spec:
+  selector:
+    app: web-source
+  ports:
+    - port: 8080
+  type: NodePort

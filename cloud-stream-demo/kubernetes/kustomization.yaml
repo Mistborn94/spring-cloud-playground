@@ -1,0 +1,5 @@
+resources:
+  - env-configmap.yml
+  - rabbitmq.yml
+  - config-server.yml
+  - web-source.yml
