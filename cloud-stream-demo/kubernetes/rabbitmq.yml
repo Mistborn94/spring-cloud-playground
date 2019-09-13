@@ -3,10 +3,10 @@ kind: Deployment
 metadata:
   name: rabbitmq
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: rabbitmq
-  replicas: 1
   template:
     metadata:
       labels:

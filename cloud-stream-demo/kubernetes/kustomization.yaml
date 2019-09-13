@@ -3,3 +3,5 @@ resources:
   - rabbitmq.yml
   - config-server.yml
   - web-source.yml
+  - processor.yml
+  - sink.yml

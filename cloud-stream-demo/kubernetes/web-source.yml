@@ -3,10 +3,10 @@ kind: Deployment
 metadata:
   name: web-source
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: web-source
-  replicas: 1
   template:
     metadata:
       labels:
