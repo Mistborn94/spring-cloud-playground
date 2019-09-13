@@ -21,6 +21,8 @@ spec:
           env:
             - name: SPRING_CLOUD_CONFIG_SERVER_GIT_URI
               value: https://github.com/Mistborn94/playground.git
+            - name: SPRING_PROFILES_ACTIVE
+              value: git, cloudstream
 ---
 kind: Service
 apiVersion: v1

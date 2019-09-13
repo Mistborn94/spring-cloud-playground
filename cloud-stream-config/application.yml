@@ -2,6 +2,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh
+        include: "*"
 example:
-  test-refresh: 'Test Refresh value 1'
+  test:
+    refresh: 'Test Refresh value 1'
