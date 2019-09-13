@@ -1,5 +1,7 @@
 package com.example.cloudstream.demo
 
+import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.cloud.stream.annotation.EnableBinding
@@ -11,10 +13,23 @@ import java.time.LocalDateTime
 @EnableBinding(Processor::class)
 class ProcessorApplication {
 
+    private val logger = LoggerFactory.getLogger(ProcessorApplication::class.java)
+
+    @Value("\${example.test-refresh}")
+    private lateinit var configValue: String
+
+    @Bean
+    fun logMessage(): (String) -> String {
+        return { message ->
+            logger.info("Config Value: {}", configValue)
+            logger.info("Message {}", message)
+            message
+        }
+    }
+
     @Bean
     fun addTimestamp(): (String) -> MessageHolder {
         return { message ->
-            println("Processing $message")
             MessageHolder(message, LocalDateTime.now())
         }
     }

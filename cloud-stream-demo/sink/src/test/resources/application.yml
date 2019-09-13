@@ -16,3 +16,5 @@ spring:
 logging:
   level:
     root: error
+example:
+  test-refresh: 'Test Refresh value 1'

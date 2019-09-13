@@ -8,7 +8,7 @@ spring:
         output:
           destination: cloudstream.sink
       function:
-        definition: byteToString|toUpperCase|addTimestamp
+        definition: byteToString|logMessage|toUpperCase|addTimestamp
   jackson:
       mapper:
         default-view-inclusion: true
