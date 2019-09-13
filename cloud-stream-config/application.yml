@@ -5,4 +5,4 @@ management:
         include: "*"
 example:
   test:
-    refresh: 'Test Refresh value 1'
+    refresh: 'Test Refresh value 2'
