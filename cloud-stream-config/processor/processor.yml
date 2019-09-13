@@ -3,9 +3,10 @@ spring:
     stream:
       bindings:
         input:
-          destination: processor
+          destination: cloudstream.processor
+          group: processor
         output:
-          destination: sink
+          destination: cloudstream.sink
       function:
         definition: byteToString|toUpperCase|addTimestamp
   jackson:

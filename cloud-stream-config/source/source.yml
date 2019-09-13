@@ -3,4 +3,4 @@ spring:
     stream:
       bindings:
         output:
-          destination: processor
+          destination: cloustream.processor

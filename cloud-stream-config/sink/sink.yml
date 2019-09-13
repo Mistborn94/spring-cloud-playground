@@ -3,4 +3,5 @@ spring:
     stream:
       bindings:
         input:
-          destination: sink
+          destination: cloudstream.sink
+          group: sink
