@@ -166,7 +166,8 @@
                             <image>${docker-maven-plugin.image-name}:jib-latest</image>
                         </to>
                         <container>
-                            <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+                            <!-- Using the current timestamp makes the container hashes different after every build :( -->
+                            <!-- <creationTime>USE_CURRENT_TIMESTAMP</creationTime>-->
                         </container>
                     </configuration>
                     <executions>
