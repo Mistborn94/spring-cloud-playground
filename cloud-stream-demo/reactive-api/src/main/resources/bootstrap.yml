@@ -1,6 +1,6 @@
 spring:
   application:
-    name: source
+    name: api
   cloud:
     config:
       fail-fast: true
@@ -8,4 +8,4 @@ spring:
         multiplier: 1.5
         initial-interval: 1000
         max-interval: 5000
-        max-attempts: 8
+        max-attempts: 15

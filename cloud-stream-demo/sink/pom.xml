@@ -8,7 +8,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>cloud-stream-sink</artifactId>
+	<artifactId>sink</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cloud-stream-sink</name>
 	<description>Cloud stream sink project</description>

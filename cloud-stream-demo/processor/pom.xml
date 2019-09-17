@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>cloud-stream-processor</artifactId>
+    <artifactId>processor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>cloud-stream-processor</name>
     <description>Cloud stream processor project</description>

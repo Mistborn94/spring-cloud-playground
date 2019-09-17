@@ -15,7 +15,7 @@ services:
       - 27017:27017
 
   configserver:
-    image: mistborn94/example-config-server:${IMAGE_TAG}
+    image: mistborn94/cloud-stream-example/config-server:${IMAGE_TAG}
     environment:
       SPRING_PROFILES_ACTIVE: cloudstream
       SPRING_CLOUD_CONFIG_SERVER_GIT_URI: https://github.com/Mistborn94/playground.git
@@ -23,7 +23,7 @@ services:
       - 8888:8888
 
   source:
-    image: mistborn94/example-cloud-stream-web-source:${IMAGE_TAG}
+    image: mistborn94/cloud-stream-example/web-source:${IMAGE_TAG}
     environment:
       SPRING_PROFILES_ACTIVE: compose
       SPRING_CLOUD_CONFIG_URI: http://configserver:8888
@@ -34,7 +34,7 @@ services:
       - configserver
 
   processor:
-    image: mistborn94/example-cloud-stream-processor:${IMAGE_TAG}
+    image: mistborn94/cloud-stream-example/processor:${IMAGE_TAG}
     environment:
       SPRING_PROFILES_ACTIVE: compose
       SPRING_CLOUD_CONFIG_URI: http://configserver:8888
@@ -43,10 +43,22 @@ services:
       - configserver
 
   sink:
-    image: mistborn94/example-cloud-stream-sink:${IMAGE_TAG}
+    image: mistborn94/cloud-stream-example/sink:${IMAGE_TAG}
     environment:
       SPRING_PROFILES_ACTIVE: compose
       SPRING_CLOUD_CONFIG_URI: http://configserver:8888
     depends_on:
       - myrabbit
       - configserver
+
+  reactive-api:
+    image: mistborn94/cloud-stream-example/reactive-web-api:${IMAGE_TAG}
+    environment:
+      SPRING_PROFILES_ACTIVE: compose
+      SPRING_CLOUD_CONFIG_URI: http://configserver:8888
+    ports:
+      - 8081:8081
+    depends_on:
+      - myrabbit
+      - configserver
+      - mongodb

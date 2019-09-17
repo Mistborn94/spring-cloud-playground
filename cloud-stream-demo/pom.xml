@@ -25,13 +25,14 @@
         <docker-maven-plugin.version>0.31.0</docker-maven-plugin.version>
         <docker-maven-plugin.dockerFile>${project.basedir}/../Dockerfile</docker-maven-plugin.dockerFile>
         <docker-maven-plugin.contextDir>${project.basedir}</docker-maven-plugin.contextDir>
-        <docker-maven-plugin.image-name>mistborn94/example-${project.artifactId}</docker-maven-plugin.image-name>
+        <docker-maven-plugin.image-name>mistborn94/cloud-stream-example/${project.artifactId}</docker-maven-plugin.image-name>
         <jib-maven-plugin.version>1.5.1</jib-maven-plugin.version>
     </properties>
 
     <modules>
         <module>config-server</module>
         <module>processor</module>
+        <module>reactive-api</module>
         <module>sink</module>
         <module>web-source</module>
     </modules>
