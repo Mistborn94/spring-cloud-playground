@@ -12,7 +12,6 @@ import java.time.LocalDateTime
 
 @SpringBootApplication
 @EnableBinding(Processor::class)
-@RefreshScope
 class ProcessorApplication(val testProperties: TestProperties) {
 
     private val logger = LoggerFactory.getLogger(ProcessorApplication::class.java)
@@ -36,6 +35,11 @@ class ProcessorApplication(val testProperties: TestProperties) {
     @Bean
     fun toUpperCase(): (String) -> String {
         return String::toUpperCase
+    }
+    
+    @Bean
+    fun trim(): (String) -> String {
+        return String::trim
     }
 
     //The usage of kotlin functions instead of java Functions seems to require this converter.
