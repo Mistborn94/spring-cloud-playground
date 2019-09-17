@@ -26,6 +26,7 @@
         <docker-maven-plugin.dockerFile>${project.basedir}/../Dockerfile</docker-maven-plugin.dockerFile>
         <docker-maven-plugin.contextDir>${project.basedir}</docker-maven-plugin.contextDir>
         <docker-maven-plugin.image-name>mistborn94/example-${project.artifactId}</docker-maven-plugin.image-name>
+        <jib-maven-plugin.version>1.5.1</jib-maven-plugin.version>
     </properties>
 
     <modules>
@@ -139,7 +140,7 @@
                     <configuration>
                         <images>
                             <image>
-                                <name>${docker-maven-plugin.image-name}</name>
+                                <name>${docker-maven-plugin.image-name}:fabric-latest</name>
                                 <build>
                                     <dockerFile>${docker-maven-plugin.dockerFile}</dockerFile>
                                     <contextDir>${docker-maven-plugin.contextDir}</contextDir>
@@ -149,9 +150,31 @@
                     </configuration>
                     <executions>
                         <execution>
-                            <id>build</id>
+                            <id>fabric-build</id>
                             <goals>
                                 <goal>build</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.google.cloud.tools</groupId>
+                    <artifactId>jib-maven-plugin</artifactId>
+                    <version>${jib-maven-plugin.version}</version>
+                    <configuration>
+                        <to>
+                            <image>${docker-maven-plugin.image-name}:jib-latest</image>
+                        </to>
+                        <container>
+                            <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+                        </container>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>jib-build</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>dockerBuild</goal>
                             </goals>
                         </execution>
                     </executions>
