@@ -1,6 +1,9 @@
 spring:
   rabbitmq:
-    host:
-      rabbitmq
+    host: rabbitmq
   jmx:
     enabled: false
+  data:
+    mongodb:
+      host: mongodb
+      database: cloud-stream-demo
