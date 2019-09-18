@@ -8,6 +8,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope
 import org.springframework.cloud.stream.annotation.EnableBinding
 import org.springframework.cloud.stream.messaging.Processor
 import org.springframework.context.annotation.Bean
+import java.time.Instant
 import java.time.LocalDateTime
 
 @SpringBootApplication
@@ -28,7 +29,7 @@ class ProcessorApplication(val testProperties: TestProperties) {
     @Bean
     fun addTimestamp(): (String) -> MessageHolder {
         return { message ->
-            MessageHolder(message, LocalDateTime.now())
+            MessageHolder(message, Instant.now())
         }
     }
 
