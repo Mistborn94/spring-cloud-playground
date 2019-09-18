@@ -12,7 +12,7 @@
     <groupId>com.example.cloud-stream-experiment</groupId>
     <artifactId>cloud-stream-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-cloud-experiment</name>
+    <name>cloud-stream-demo</name>
     <description>Spring Cloud experimental projects</description>
 
     <properties>
@@ -167,6 +167,9 @@
                             <image>${docker-maven-plugin.image-name}:jib-latest</image>
                         </to>
                         <container>
+                            <jvmFlags>
+                                <jvmFlag>-Duser.timezone=Africa/Johannesburg</jvmFlag>
+                            </jvmFlags>
                             <!-- Using the current timestamp makes the container hashes different after every build :( -->
                             <!-- <creationTime>USE_CURRENT_TIMESTAMP</creationTime>-->
                         </container>
