@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Stream Test</title>
+</head>
+<body>
+<h1>Events</h1>
+<ul id="list"></ul>
+</body>
+<script>
+    const evtSource = new EventSource("http://localhost:8081/messages/unprocessed");
+    evtSource.onmessage = function (event) {
+        const newElement = document.createElement("li");
+        newElement.innerHTML = "message: " + event.data + " " + new Date().toISOString();
+
+        const eventList = document.getElementById("list");
+
+        eventList.appendChild(newElement);
+    }
+
+    evtSource.onerror = function(...args) {
+        console.log("Error: " + JSON.stringify(args))
+    }
+
+    evtSource.onopen = function(...args) {
+        console.log("Open: " + JSON.stringify(args))
+    }
+</script>
+</html>

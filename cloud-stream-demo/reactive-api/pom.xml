@@ -40,6 +40,16 @@
             <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>
 
+        <!-- Reactive Cloud Stream-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-reactive</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+        </dependency>
+
 
         <!-- Cloud Config -->
         <dependency>
@@ -47,7 +57,7 @@
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
 
-<!-- spring-retry and spring-boot-starter-aop -->
+        <!-- Spring-retry and spring-boot-starter-aop are needed to retry the config connection if it fails-->
         <dependency>
             <groupId>org.springframework.retry</groupId>
             <artifactId>spring-retry</artifactId>

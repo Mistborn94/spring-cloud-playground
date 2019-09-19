@@ -1,0 +1,17 @@
+# This docker compose file runs the external services required for the spring boot apps and exposes the correct ports
+# to be able to run the apps locally
+
+version: '3'
+services:
+
+  rabbit-local:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 5671:5671
+      - 15672:15672
+
+  mongodb-local:
+    image: mongo:3.4-xenial
+    ports:
+      - 27017:27017

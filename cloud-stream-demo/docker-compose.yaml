@@ -3,20 +3,9 @@ services:
 
   myrabbit:
     image: rabbitmq:3-management
-    # Technically these ports do not need to be exposed. It is just more convenient if I want to run some of my
-    # applications outside docker
-    ports:
-      - 5672:5672
-      - 5671:5671
-      - 15671:15671
-      - 15672:15672
 
   mongodb:
     image: mongo:3.4-xenial
-    # Technically these ports do not need to be exposed. It is just more convenient if I want to run some of my
-    # applications outside docker
-    ports:
-      - 27017:27017
 
   configserver:
     image: mistborn94/cloud-stream-example/config-server:${IMAGE_TAG}
@@ -52,6 +41,7 @@ services:
     depends_on:
       - myrabbit
       - configserver
+      - mongodb
 
   reactive-api:
     image: mistborn94/cloud-stream-example/reactive-web-api:${IMAGE_TAG}

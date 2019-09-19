@@ -1,8 +1,0 @@
-spring:
-  cloud:
-    stream:
-      bindings:
-        output:
-          destination: cloudstream.processor
-example:
-  test-refresh: 'Test Refresh value 1'
