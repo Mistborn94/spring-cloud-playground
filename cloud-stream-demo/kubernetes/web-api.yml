@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-source
+  name: web-api
   labels:
     project: cloud-stream-demo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web-source
+      app: web-api
   template:
     metadata:
       labels:
-        app: web-source
+        app: web-api
         project: cloud-stream-demo
     spec:
       containers:
-        - name: web-source
-          image: mistborn94/cloud-stream-example/web-source:latest
+        - name: web-api
+          image: mistborn94/cloud-stream-example/reactive-web-api:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
@@ -28,12 +28,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-source
+  name: web-api
   labels:
     project: cloud-stream-demo
 spec:
   selector:
-    app: web-source
+    app: web-api
   ports:
     - port: 8080
   type: NodePort

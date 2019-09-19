@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: config-server
-          image: mistborn94/example-config-server:latest
+          image: mistborn94/cloud-stream-example/config-server:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8888

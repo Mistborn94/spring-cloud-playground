@@ -1,7 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+  - name: mistborn94/cloud-stream-example/config-server
+    newTag: fabric-latest
+  - name: mistborn94/cloud-stream-example/web-source
+    newTag: fabric-latest
+  - name: mistborn94/cloud-stream-example/processor
+    newTag: fabric-latest
+  - name: mistborn94/cloud-stream-example/sink
+    newTag: fabric-latest
+  - name: mistborn94/cloud-stream-example/reactive-web-api
+    newTag: fabric-latest
 resources:
   - env-configmap.yml
   - rabbitmq.yml
+  - mongodb.yml
   - config-server.yml
   - web-source.yml
+  - web-api.yml
   - processor.yml
   - sink.yml

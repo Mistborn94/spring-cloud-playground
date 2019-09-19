@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: processor
-          image: mistborn94/example-cloud-stream-processor:latest
+          image: mistborn94/cloud-stream-example/processor:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8080

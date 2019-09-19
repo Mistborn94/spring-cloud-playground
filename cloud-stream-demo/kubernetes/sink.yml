@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: sink
-          image: mistborn94/example-cloud-stream-sink:latest
+          image: mistborn94/cloud-stream-example/sink:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
