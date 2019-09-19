@@ -3,6 +3,8 @@ services:
 
   myrabbit:
     image: rabbitmq:3-management
+    # Technically these ports do not need to be exposed. It is just more convenient if I want to run some of my
+    # applications outside docker
     ports:
       - 5672:5672
       - 5671:5671
@@ -11,6 +13,8 @@ services:
 
   mongodb:
     image: mongo:3.4-xenial
+    # Technically these ports do not need to be exposed. It is just more convenient if I want to run some of my
+    # applications outside docker
     ports:
       - 27017:27017
 
@@ -19,8 +23,6 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: cloudstream
       SPRING_CLOUD_CONFIG_SERVER_GIT_URI: https://github.com/Mistborn94/playground.git
-    ports:
-      - 8888:8888
 
   source:
     image: mistborn94/cloud-stream-example/web-source:${IMAGE_TAG}
