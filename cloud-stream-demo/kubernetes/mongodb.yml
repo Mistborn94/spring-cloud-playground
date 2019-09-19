@@ -27,4 +27,4 @@ spec:
     app: mongodb
   ports:
     - port: 27017
-  type: NodePort
+  type: ClusterIP
