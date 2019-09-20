@@ -1,4 +1,4 @@
-package com.example.cloudstream.demo
+package com.example.cloudstream.demo.repository
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING

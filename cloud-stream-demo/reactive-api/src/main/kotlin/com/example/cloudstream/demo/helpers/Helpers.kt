@@ -1,4 +1,4 @@
-package com.example.cloudstream.demo
+package com.example.cloudstream.demo.helpers
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

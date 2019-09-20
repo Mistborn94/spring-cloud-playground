@@ -1,4 +1,4 @@
-package com.example.cloudstream.demo
+package com.example.cloudstream.demo.repository
 
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
 
