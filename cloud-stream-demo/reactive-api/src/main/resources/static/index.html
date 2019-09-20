@@ -6,25 +6,50 @@
 </head>
 <body>
 <h1>Events</h1>
-<ul id="list"></ul>
+<div>
+    <div>
+        <h2>Incoming Messages: </h2>
+        <ul id="incoming-list"></ul>
+    </div>
+    <div>
+        <h2>Published Messages</h2>
+        <button id="refresh-btn">Refresh</button>
+        <ul id="processed-list"></ul>
+    </div>
+</div>
 </body>
 <script>
-    const evtSource = new EventSource("http://localhost:8081/messages/unprocessed");
-    evtSource.onmessage = function (event) {
-        const newElement = document.createElement("li");
-        newElement.innerHTML = "message: " + event.data + " " + new Date().toISOString();
+    setupEventSource();
+    fetchProcessedMessages();
 
-        const eventList = document.getElementById("list");
-
-        eventList.appendChild(newElement);
+    document.getElementById("refresh-btn").onclick = () => {
+        fetchProcessedMessages()
     }
 
-    evtSource.onerror = function(...args) {
-        console.log("Error: " + JSON.stringify(args))
+    function setupEventSource() {
+        const evtSource = new EventSource("http://localhost:8081/messages/unprocessed");
+        evtSource.onmessage = function (event) {
+            const newElement = document.createElement("li");
+            newElement.innerHTML = "Message: " + event.data + " Time: " + new Date().toString();
+
+            const messageList = document.getElementById("incoming-list");
+
+            messageList.appendChild(newElement);
+        }
     }
 
-    evtSource.onopen = function(...args) {
-        console.log("Open: " + JSON.stringify(args))
+    function fetchProcessedMessages() {
+        let messageList = document.getElementById("processed-list");
+        messageList.innerHTML = "";
+
+        fetch('http://localhost:8081/messages/processed')
+            .then(response => response.json())
+            .then(data => data.forEach((item) => {
+                const newElement = document.createElement("li");
+                newElement.innerHTML = JSON.stringify(item, null, 2);
+                messageList.appendChild(newElement);
+            }))
     }
+
 </script>
 </html>
