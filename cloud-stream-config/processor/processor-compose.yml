@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: cloudstream-compose.processor
+        output:
+          destination: cloudstream-compose.sink

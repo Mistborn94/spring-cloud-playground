@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: cloudstream-kubernetes.processor
+        output:
+          destination: cloudstream-kubernetes.sink
