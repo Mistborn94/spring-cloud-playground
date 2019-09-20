@@ -17,10 +17,13 @@ class ProcessorListener {
     private val source: Flux<String> = Flux.create<String>(publisher)
 
     fun getEvents(): Flux<String> {
-        return source.doOnNext { logger.info("Emit $it") }
+        return source.doOnError { e -> logger.error("Failure fetching items ", e) }
     }
 
     @StreamListener(Sink.INPUT)
-    fun listen(value: String) = publisher.publish(value)
+    fun listen(value: String) {
+        logger.info("Read '{}' from stream", value)
+        publisher.publish(value)
+    }
 }
 

@@ -1,7 +1,9 @@
 package com.example.cloudstream.demo.listener
 
-import org.reactivestreams.Publisher
+import com.example.cloudstream.demo.helpers.getKLogger
 import reactor.core.publisher.FluxSink
+import java.util.*
+import java.util.concurrent.CopyOnWriteArraySet
 import java.util.function.Consumer
 
 /**
@@ -17,22 +19,22 @@ import java.util.function.Consumer
  *   publisher.publish(value)
  * ```
  */
-class FluxPublisher<T>: Consumer<FluxSink<T>> {
+class FluxPublisher<T> : Consumer<FluxSink<T>> {
 
-    private val consumers = mutableListOf<Consumer<T>>()
-
-    private fun addConsumer(listener: (T) -> Unit) {
-        consumers.add(Consumer(listener))
-    }
+    //We need a thread safe collection here, otherwise registering and de-registering multiple sinks at the same time can cause Concurrent Modification Exceptions
+    private val sinks = CopyOnWriteArraySet<FluxSink<T>>()
+    private val logger = getKLogger(FluxPublisher::class)
 
     /**
      * Register a [FluxSink] and publish all future emitted messages to it
      */
     override fun accept(sink: FluxSink<T>) {
-        this.addConsumer { event ->
-            //The inner lambda is the event listener.
-            // Any time the registry.next is called this consumer is triggered and it pushes data to the sink.
-            sink.next(event)
+        sinks.add(sink)
+        logger.info("Sink {} Registered", sink.hashCode())
+
+        sink.onDispose {
+            logger.info("Sink {} Disposed", sink.hashCode())
+            sinks.remove(sink)
         }
     }
 
@@ -41,6 +43,10 @@ class FluxPublisher<T>: Consumer<FluxSink<T>> {
      * @param data The value to publish
      */
     fun publish(data: T) {
-        consumers.forEach { it.accept(data) }
+        logger.info("Publishing '{}' to {} sinks", data, sinks.size)
+        sinks.forEach {
+            logger.info("Publishing message to sink {}", it.hashCode())
+            it.next(data)
+        }
     }
 }
