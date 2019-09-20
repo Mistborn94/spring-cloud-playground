@@ -1,20 +1,24 @@
 package com.example.cloudstream.demo.listener
 
+import org.reactivestreams.Publisher
 import reactor.core.publisher.FluxSink
 import java.util.function.Consumer
 
 /**
- * The publisher allows publishing items from an imperative context to a Flux
+ * The publisher allows publishing items to a Flux from an imperative context.
  *
- * Example:
+ * The class acts as both a Publisher ([publish] method) and a [FluxSink] consumer ([accept] method)
+ *
+ * Usage Example:
  * ```
  *   val publisher = FluxPublisher<String>()
- *   val source: Flux<String> = Flux.create<String>(publisher.fluxSinkListener())
+ *   val source: Flux<String> = Flux.create<String>(publisher)
  *   ...
  *   publisher.publish(value)
  * ```
  */
-class FluxPublisher<T> {
+class FluxPublisher<T>: Consumer<FluxSink<T>> {
+
     private val consumers = mutableListOf<Consumer<T>>()
 
     private fun addConsumer(listener: (T) -> Unit) {
@@ -22,21 +26,20 @@ class FluxPublisher<T> {
     }
 
     /**
-     * Constructs a consumer that can be used to construct a [reactor.core.publisher.Flux] with the [reactor.core.publisher.Flux.create] method
-     *
-     * The consumer publishes an item to the consumed sink every time [publish] is called
+     * Register a [FluxSink] and publish all future emitted messages to it
      */
-    fun emitter(): Consumer<FluxSink<T>> {
-        return Consumer { sink: FluxSink<T> ->
-            //The outer lambda is a sink consumer. This is the only context the sink is available in
-            this.addConsumer { event ->
-                //The inner lambda is the event listener.
-                // Any time the registry.next is called this consumer is triggered and it pushes data to the sink.
-                sink.next(event)
-            }
+    override fun accept(sink: FluxSink<T>) {
+        this.addConsumer { event ->
+            //The inner lambda is the event listener.
+            // Any time the registry.next is called this consumer is triggered and it pushes data to the sink.
+            sink.next(event)
         }
     }
 
+    /**
+     * Publish an item to every registered [FluxSink]
+     * @param data The value to publish
+     */
     fun publish(data: T) {
         consumers.forEach { it.accept(data) }
     }

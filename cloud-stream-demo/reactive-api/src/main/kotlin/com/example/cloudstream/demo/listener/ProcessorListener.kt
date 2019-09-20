@@ -14,7 +14,7 @@ class ProcessorListener {
     private val logger = getKLogger(ProcessorListener::class)
 
     private val publisher = FluxPublisher<String>()
-    private val source: Flux<String> = Flux.create<String>(publisher.emitter())
+    private val source: Flux<String> = Flux.create<String>(publisher)
 
     fun getEvents(): Flux<String> {
         return source.doOnNext { logger.info("Emit $it") }

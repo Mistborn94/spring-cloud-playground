@@ -24,7 +24,7 @@
 
     document.getElementById("refresh-btn").onclick = () => {
         fetchProcessedMessages()
-    }
+    };
 
     function setupEventSource() {
         const evtSource = new EventSource("http://localhost:8081/messages/unprocessed");
