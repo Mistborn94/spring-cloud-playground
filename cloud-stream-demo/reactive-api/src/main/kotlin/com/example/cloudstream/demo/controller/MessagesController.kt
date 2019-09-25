@@ -26,6 +26,7 @@ class MessagesController(val repository: ReactiveMessageRepository,
 
     @GetMapping("/messages/processed")
     fun getAllMessages(): Flux<MessageDocument> {
+        logger.info("Starting Fetch All Items")
         return repository.findAll()
                 .doFinally { logger.info("Fetched all Items") }
                 .doOnError { e -> logger.error("Failure fetching items ", e) }
@@ -34,5 +35,6 @@ class MessagesController(val repository: ReactiveMessageRepository,
     @GetMapping("/messages/unprocessed", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
     fun getUnprocessedMessages(): Flux<String> {
         return processorListener.getEvents()
+                .doOnNext { logger.info("\tPushing message to client: {}", it) }
     }
 }

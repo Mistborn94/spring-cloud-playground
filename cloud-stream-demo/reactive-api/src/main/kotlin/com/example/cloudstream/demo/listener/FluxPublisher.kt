@@ -45,7 +45,7 @@ class FluxPublisher<T> : Consumer<FluxSink<T>> {
     fun publish(data: T) {
         logger.info("Publishing '{}' to {} sinks", data, sinks.size)
         sinks.forEach {
-            logger.info("Publishing message to sink {}", it.hashCode())
+            logger.info("\tPublishing message to sink {}", it.hashCode())
             it.next(data)
         }
     }
