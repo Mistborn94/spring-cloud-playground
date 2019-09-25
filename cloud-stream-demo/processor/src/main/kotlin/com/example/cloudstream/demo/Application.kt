@@ -1,15 +1,12 @@
 package com.example.cloudstream.demo
 
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.cloud.context.config.annotation.RefreshScope
 import org.springframework.cloud.stream.annotation.EnableBinding
 import org.springframework.cloud.stream.messaging.Processor
 import org.springframework.context.annotation.Bean
 import java.time.Instant
-import java.time.LocalDateTime
 
 @SpringBootApplication
 @EnableBinding(Processor::class)
