@@ -54,3 +54,12 @@ services:
       - myrabbit
       - configserver
       - mongodb
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - .:/etc/prometheus/
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - 9090:9090
