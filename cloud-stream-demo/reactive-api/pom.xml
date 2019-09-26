@@ -66,7 +66,7 @@
         <!-- Exposes bus-refresh endpoints for cloud config-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bus</artifactId>
+            <artifactId>spring-cloud-bus</artifactId>
         </dependency>
 
         <!-- Monitoring with Spring Actuator and  Prometheus -->
