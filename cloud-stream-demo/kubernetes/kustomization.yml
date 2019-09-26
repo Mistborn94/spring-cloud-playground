@@ -1,5 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: monitoring
+configMapGenerator:
+  - name: prometheus-server-conf
+    files:
+      - prometheus.yml
 images:
   - name: mistborn94/cloud-stream-example/config-server
     newTag: fabric-latest
@@ -12,6 +17,9 @@ images:
   - name: mistborn94/cloud-stream-example/reactive-web-api
     newTag: fabric-latest
 resources:
+  - namespace.yml
+  - cluster-roles.yml
+  - prometheus-deployments.yml
   - env-configmap.yml
   - rabbitmq.yml
   - mongodb.yml

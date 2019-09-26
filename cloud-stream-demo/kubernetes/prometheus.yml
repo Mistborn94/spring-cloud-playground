@@ -1,0 +1,23 @@
+scrape_configs:
+  - job_name: 'kubernetes-pods'
+
+    metrics_path: /actuator/prometheus
+    kubernetes_sd_configs:
+      - role: pod
+
+    relabel_configs:
+      # Keep only pods with the label project=cloud-stream-demo
+      - source_labels: [__meta_kubernetes_pod_label_project]
+        action: keep
+        regex: cloud-stream-demo
+      # Keep custom labels
+      - action: labelmap
+        regex: __meta_kubernetes_pod_label_(.+)
+      # Create kubernetes_namespace label
+      - source_labels: [__meta_kubernetes_namespace]
+        action: replace
+        target_label: kubernetes_namespace
+      # Create kubernetes_pod_name label
+      - source_labels: [__meta_kubernetes_pod_name]
+        action: replace
+        target_label: kubernetes_pod_name

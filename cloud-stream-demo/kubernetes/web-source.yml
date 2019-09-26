@@ -36,4 +36,5 @@ spec:
     app: web-source
   ports:
     - port: 8080
+      nodePort: 30100
   type: NodePort
