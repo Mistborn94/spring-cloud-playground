@@ -1,8 +1,4 @@
 spring:
-  cloud:
-    stream:
-      function:
-        definition: copyFlux
   jackson:
-      mapper:
-        default-view-inclusion: true
+    mapper:
+      default-view-inclusion: true

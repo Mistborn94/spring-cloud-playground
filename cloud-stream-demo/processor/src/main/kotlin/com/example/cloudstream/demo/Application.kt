@@ -41,7 +41,7 @@ class ProcessorApplication(val testProperties: TestProperties) {
     }
 
     //The usage of kotlin functions instead of java Functions seems to require this converter.
-    //Weird. This needs more investigation
+    //Changing the first function in the chain to be a java.util.function.Function<String, String> also fixes it
     @Bean
     fun byteToString(): (ByteArray) -> String {
         return ::String
