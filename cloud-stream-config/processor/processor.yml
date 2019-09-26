@@ -9,3 +9,6 @@ spring:
   jackson:
       mapper:
         default-view-inclusion: true
+# I want only the management server's port opened
+server:
+  port: -1

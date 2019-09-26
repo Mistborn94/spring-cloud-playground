@@ -4,3 +4,6 @@ spring:
       bindings:
         input:
           group: sink
+# I want only the management server's port opened
+server:
+  port: -1

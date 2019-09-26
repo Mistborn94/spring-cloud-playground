@@ -4,7 +4,6 @@ spring:
       myrabbit
   jmx:
     enabled: false
-  data:
     mongodb:
       host: mongodb
       database: cloud-stream-demo

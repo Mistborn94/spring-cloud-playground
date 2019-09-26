@@ -6,3 +6,6 @@ spring:
           destination: cloudstream-local.processor
         output:
           destination: cloudstream-local.sink
+management:
+  server:
+    port: 8082
