@@ -27,7 +27,7 @@
     };
 
     function setupEventSource() {
-        const eventSource = new EventSource("http://localhost:8081/messages/unprocessed");
+        const eventSource = new EventSource("/messages/unprocessed");
         eventSource.onmessage = function (event) {
             const newElement = document.createElement("li");
             newElement.innerHTML = "Message: " + event.data + " Time: " + new Date().toString();
@@ -42,7 +42,7 @@
         let messageList = document.getElementById("processed-list");
         messageList.innerHTML = "";
 
-        fetch('http://localhost:8081/messages/processed')
+        fetch("/messages/processed")
             .then(response => response.json())
             .then(data => data.forEach((item) => {
                 const newElement = document.createElement("li");
