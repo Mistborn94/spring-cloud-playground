@@ -7,3 +7,6 @@ spring:
 # I want only the management server's port opened
 server:
   port: -1
+management:
+  server:
+    port: 8080
