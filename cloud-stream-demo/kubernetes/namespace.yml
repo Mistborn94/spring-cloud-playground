@@ -1,8 +1,7 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: monitoring
+  name: cloud-stream-demo
   labels:
-    name: monitoring
-    project: cloud-stream-demo
+    name: cloud-stream-demo
 
